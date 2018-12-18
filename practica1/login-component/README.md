@@ -3,9 +3,9 @@ Practice 1 - Login Component
 This component is structured to display a view of Login / Sign in.
 
 Elements used in this component
-<paper-input>
-<paper-card>
-<paper-button>
+# <paper-input>
+# <paper-card>
+# <paper-button>
 
 Action Efects
 Toogle between Login / Sign in.
