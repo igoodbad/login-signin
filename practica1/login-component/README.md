@@ -12,11 +12,11 @@ Toogle between Login / Sign in.<br />
 
 Validations includes<br />
 1.- Login<br />
-    a) Username and Password required<br />
-    b) Only 1 user register<br />
-        username: igoodbad<br />
-        password: practices<br />
-    c) Validation username/password incorrect<br />
+____a) Username and Password required<br />
+____b) Only 1 user register<br />
+________username: igoodbad<br />
+________password: practices<br />
+____c) Validation username/password incorrect<br />
 2.- Register<br />
-    a) Password minimun length 5 characteres<br />
-    b) Password confirm<br />
+____a) Password minimun length 5 characteres<br />
+____b) Password confirm<br />
