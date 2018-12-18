@@ -8,14 +8,55 @@
       :host {
         display: block;
       }
+      #buttonLogin{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+        border: 0.05em black solid;
+        width: 50%;
+      }
+      #buttonRegister{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+        border: 0.05em black solid;
+        width: 50%;
+      }
     </style>
-    <paper-card heading="Inicia sesión" alt="Inicia sesión">
+    <paper-card heading="Inicia sesión" alt="Inicia sesión" hidden="[[hideLogin]]">
+      <h2>Inicio de sesión (ñ.ñ)/</h2>
       <div class="card-content">
-          <paper-input label="Nombre de usuario" value="{{username}}"></paper-input>
-          <paper-input label="Contraseña" type="password" value="{{password}}"></paper-input>
+        <paper-input label="Nombre de usuario" value="{{username}}"></paper-input>
+        <paper-input label="Contraseña" type="password" value="{{password}}"></paper-input>
       </div>
       <div class="card-actions">
-          <paper-button on-tap="login">Iniciar sesión</paper-button>
+        <paper-button on-tap="login" id="buttonLogin">Entrar</paper-button>
+        <br />
+        <p>
+          <i>Aun no estas registrado? </i>
+          <paper-button on-tap="goRegister"><b>Registrarte AQUI!!</b></paper-button>
+        </p>
+      </div>
+    </paper-card>
+    <paper-card heading="Registro" alt="Registro" hidden="[[hideRegister]]">
+      <h2>Completa los datos para registrarte L(*u*)/</h2>
+      <div class="card-content">
+        <paper-input label="Nombre(s)" value="{{newFistName}}"></paper-input>
+        <paper-input label="Apellidos" value="{{newLastName}}"></paper-input>
+        <paper-input label="Usuario" value="{{newUsername}}"></paper-input>
+        <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password" value="{{newPassword}}"></paper-input>
+        <sub>(minimo 5 caracteres)</sub>
+        <paper-input label="Vuelve a ingresar tu contraseña" type="password" value="{{confirmPassword}}"></paper-input>
+      </div>
+      <div class="card-actions">
+        <paper-button on-tap="signin" id="buttonRegister">Registrarme!!</paper-button>
+        <br />
+        <p>
+          <i>Ya tienes una cuenta? </i>
+          <paper-button on-tap="goLogin"><b>Inicia sesión AQUI!!</b></paper-button>
+        </p>
       </div>
     </paper-card>
   </template>
@@ -40,14 +81,59 @@
           password: {
             type: String,
             value: ''
+          },
+          hideLogin: {
+            type: Boolean,
+            value: false
+          },
+          hideRegister: {
+            type: Boolean,
+            value: true
           }
         };
       }
-      login(){
-        alert("Usuario "+this.username+", password "+this.password);
+      goRegister() {
+        this.set('newFistName', "");
+        this.set('newLastName', "");
+        this.set('newUsername', "");
+        this.set('newPassword', "");
+        this.set('confirmPassword', "");
+        this.set('hideLogin', true);
+        this.set('hideRegister', false);
       }
-      signin(){
-        alert("registro");
+      goLogin() {
+        this.set('username', "");
+        this.set('password', "");
+        this.set('hideLogin', false);
+        this.set('hideRegister', true);
+      }
+      login() {
+        if (!this.username || !this.password) {
+          alert("Por favor complete sus datos.");
+        } else if (this.username === "igoodbad" && this.password === "practices") {
+          alert("Bienvenido de nuevo " + this.username);
+          this.set('username', "");
+          this.set('password', "");
+        } else {
+          alert("Usuario y/o contraseña incorrectos, vuelva a intentar.");
+        }
+      }
+      signin() {
+        if (!this.newFistName || !this.newLastName || !this.newUsername || !this.newPassword || !this.confirmPassword) {
+          alert("Por favor llene los campos.")
+        } else {
+          if (this.newPassword.length < 5) {
+            alert("Su contraseña debe ser minimo de 5 caracteres.");
+          } else {
+            if (this.newPassword != this.confirmPassword) {
+              alert("Por favor rectifique su contraseña.");
+            } else {
+              alert("Registro generado con exito.");
+              this.goLogin();
+            }
+          }
+        }
+
       }
     }
 

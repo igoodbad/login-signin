@@ -1,21 +1,22 @@
-# \<login-component\>
+Practice 1 - Login Component
 
+This component is structured to display a view of Login / Sign in.
 
+Elements used in this component
+<paper-input>
+<paper-card>
+<paper-button>
 
-## Install the Polymer-CLI
+Action Efects
+Toogle between Login / Sign in.
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
-
-```
-$ polymer serve
-```
-
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+Validations includes
+1.- Login
+    a) Username and Password required
+    b) Only 1 user register
+        username: igoodbad
+        password: practices
+    c) Validation username/password incorrect
+2.- Register
+    a) Password minimun length 5 characteres
+    b) Password confirm
