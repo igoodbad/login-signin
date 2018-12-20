@@ -1,14 +1,18 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../polymer/elements/lib/dom-if.html">
 
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-button/paper-button.html">
 
-<dom-module id="login-component">
+<dom-module id="login-signin">
     <template>
         <style>
             :host {
                 display: block;
+            }
+
+            #panelLogin h2{
+                text-align: center;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             }
 
             #buttonLogin {
@@ -31,15 +35,15 @@
         </style>
         <dom-if if="[[!toggleFormStatus]]">
             <template>
-                <paper-card heading="Inicia sesión" alt="Inicia sesión">
+                <paper-card id="panelLogin" alt="Inicia sesión">
                     <h2>Inicio de sesión (ñ.ñ)/</h2>
                     <div class="card-content">
-                        <paper-input label="Nombre de usuario" value="{{username}}"></paper-input>
-                        <paper-input label="Contraseña" type="password" value="{{password}}"></paper-input>
+                        <paper-input label="Nombre de usuario" value="{{user.username}}"></paper-input>
+                        <paper-input label="Contraseña" type="password" value="{{user.password}}"></paper-input>
                     </div>
                     <div class="card-actions">
                         <paper-button on-tap="login" id="buttonLogin">Entrar</paper-button>
-                        <br/>
+                        <br />
                         <p>
                             <i>Aun no estas registrado? </i>
                             <paper-button on-tap="toggleForm"><b>Registrarte AQUI!!</b></paper-button>
@@ -50,17 +54,15 @@
         </dom-if>
         <dom-if if="[[toggleFormStatus]]">
             <template>
-                <paper-card heading="Registro" alt="Registro">
+                <paper-card alt="Registro">
                     <h2>Completa los datos para registrarte L(*u*)/</h2>
                     <div class="card-content">
                         <paper-input label="Nombre(s)" value="{{register.firstName}}"></paper-input>
                         <paper-input label="Apellidos" value="{{register.lastName}}"></paper-input>
                         <paper-input label="Usuario" value="{{register.username}}"></paper-input>
-                        <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password"
-                                     value="{{register.password}}"></paper-input>
+                        <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password" value="{{register.password}}"></paper-input>
                         <sub>(minimo 5 caracteres)</sub>
-                        <paper-input label="Vuelve a ingresar tu contraseña" type="password"
-                                     value="{{register.confirmPassword}}"></paper-input>
+                        <paper-input label="Vuelve a ingresar tu contraseña" type="password" value="{{register.confirmPassword}}"></paper-input>
                     </div>
                     <div class="card-actions">
                         <paper-button on-tap="signin" id="buttonRegister">Registrate</paper-button>
@@ -83,9 +85,9 @@
          * @polymer
          * @demo demo/index.html
          */
-        class LoginComponent extends Polymer.Element {
+        class LoginSignin extends Polymer.Element {
             static get is() {
-                return 'login-component';
+                return 'login-signin';
             }
 
             static get properties() {
@@ -100,13 +102,12 @@
                             confirmPassword: ''
                         }
                     },
-                    username: {
-                        type: String,
-                        value: ''
-                    },
-                    password: {
-                        type: String,
-                        value: ''
+                    user: {
+                        type: Object,
+                        value: {
+                            username: '',
+                            password: ''
+                        }
                     },
                     toggleFormStatus: {
                         type: Boolean,
@@ -122,12 +123,11 @@
             }
 
             login() {
-                if (!this.username || !this.password) {
+                if (this.user.username === "" || this.user.password === "") {
                     alert("Por favor complete sus datos.");
-                } else if (this.username === "igoodbad" && this.password === "practices") {
-                    alert("Bienvenido de nuevo " + this.username);
-                    this.set('username', "");
-                    this.set('password', "");
+                } else if (this.user.username === "igoodbad" && this.user.password === "practices") {
+                    alert("Bienvenido de nuevo " + this.user.username);
+                    this._cleanLogin();
                 } else {
                     alert("Usuario y/o contraseña incorrectos, vuelva a intentar.");
                 }
@@ -152,13 +152,19 @@
             }
 
             _cleanLogin() {
-                this.set('username', "");
-                this.set('password', "");
+                this.set('user', {
+                    username: '',
+                    password: ''
+                });
             }
 
             _validateFieldsRequired() {
-                const fields = ['newFistName', 'newLastName', 'newUsername', 'newPassword', 'confirmPassword'];
-                return fields.every(field => this[field] !== '');
+                const fields = [this.register.firstName, this.register.lastName, this.register.username, this.register.password, this.register.confirmPassword];
+                return fields.every(this._isEmptyElement);
+            }
+
+            _isEmptyElement(currentValue) {
+                return currentValue !== '';
             }
 
             _validatePasswords() {
@@ -170,11 +176,16 @@
                     } else {
                         alert("Registro generado con exito.");
                         this.toggleForm();
+                        this.dispatchEvent(new CustomEvent("register-complete", {
+                            bubbles: false,
+                            composed: false,
+                            detail: this.register
+                        }));
                     }
                 }
             }
         }
 
-        window.customElements.define(LoginComponent.is, LoginComponent);
+        window.customElements.define(LoginSignin.is, LoginSignin);
     </script>
 </dom-module>
