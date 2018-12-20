@@ -85,7 +85,7 @@
          * @polymer
          * @demo demo/index.html
          */
-         class LoginSignin extends Polymer.Element {
+        class LoginSignin extends Polymer.Element {
             static get is() {
                 return 'login-signin';
             }
@@ -120,7 +120,7 @@
                 this.set('toggleFormStatus', !this.toggleFormStatus);
             }
 
-            _cleanAll(){
+            _cleanAll() {
                 this._cleanLogin();
                 this._cleanRegister();
             }
@@ -128,11 +128,12 @@
             login() {
                 if (this.user.username === "" || this.user.password === "") {
                     alert("Por favor complete sus datos.");
-                } else if (this.user.username === "igoodbad" && this.user.password === "practices") {
-                    alert("Bienvenido de nuevo " + this.user.username);
-                    this._cleanLogin();
                 } else {
-                    alert("Usuario y/o contraseña incorrectos, vuelva a intentar.");
+                    this.dispatchEvent(new CustomEvent("login-complete", {
+                        bubbles: false,
+                        composed: false,
+                        detail: this.user
+                    }));
                 }
             }
 
@@ -177,7 +178,6 @@
                     if (this.register.password !== this.register.confirmPassword) {
                         alert("Por favor rectifique su contraseña.");
                     } else {
-                        alert("Registro generado con exito.");
                         this.dispatchEvent(new CustomEvent("register-complete", {
                             bubbles: false,
                             composed: false,
