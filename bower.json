@@ -1,6 +1,6 @@
 {
-  "name": "login-component",
-  "main": "login-component.html",
+  "name": "login-signin",
+  "main": "login-signin.html",
   "dependencies": {
     "polymer": "^2.0.0",
     "paper-input": "2.2.3",
