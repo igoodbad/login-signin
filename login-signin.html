@@ -59,6 +59,7 @@
                     <div class="card-content">
                         <paper-input label="Nombre(s)" value="{{register.firstName}}"></paper-input>
                         <paper-input label="Apellidos" value="{{register.lastName}}"></paper-input>
+                        <paper-input label="Edad" value="{{register.age}}"></paper-input>
                         <paper-input label="Usuario" value="{{register.username}}"></paper-input>
                         <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password" value="{{register.password}}"></paper-input>
                         <sub>(minimo 5 caracteres)</sub>
@@ -97,6 +98,7 @@
                         value: {
                             firstName: '',
                             lastName: '',
+                            age: '',
                             username: '',
                             password: '',
                             confirmPassword: ''
@@ -149,6 +151,7 @@
                 this.set('register', {
                     firstName: '',
                     lastName: '',
+                    age: '',
                     username: '',
                     password: '',
                     confirmPassword: ''
