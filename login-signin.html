@@ -85,7 +85,7 @@
          * @polymer
          * @demo demo/index.html
          */
-        class LoginSignin extends Polymer.Element {
+         class LoginSignin extends Polymer.Element {
             static get is() {
                 return 'login-signin';
             }
@@ -117,9 +117,12 @@
             }
 
             toggleForm() {
+                this.set('toggleFormStatus', !this.toggleFormStatus);
+            }
+
+            _cleanAll(){
                 this._cleanLogin();
                 this._cleanRegister();
-                this.set('toggleFormStatus', !this.toggleFormStatus);
             }
 
             login() {
@@ -175,12 +178,13 @@
                         alert("Por favor rectifique su contraseña.");
                     } else {
                         alert("Registro generado con exito.");
-                        this.toggleForm();
                         this.dispatchEvent(new CustomEvent("register-complete", {
                             bubbles: false,
                             composed: false,
                             detail: this.register
                         }));
+                        this.toggleForm();
+                        this._cleanAll();
                     }
                 }
             }
