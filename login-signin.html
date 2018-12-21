@@ -95,21 +95,21 @@
                 return {
                     register: {
                         type: Object,
-                        value: {
+                        value: () => ({
                             firstName: '',
                             lastName: '',
                             age: '',
                             username: '',
                             password: '',
                             confirmPassword: ''
-                        }
+                        })
                     },
                     user: {
                         type: Object,
-                        value: {
+                        value: () => ({
                             username: '',
                             password: ''
-                        }
+                        })
                     },
                     toggleFormStatus: {
                         type: Boolean,
