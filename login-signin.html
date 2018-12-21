@@ -33,159 +33,166 @@
                 width: 50%;
             }
         </style>
-        <template>
-            <paper-card id="panelLogin" alt="Inicia sesión" hidden="[[!toggleFormStatus]]">
-                <h2>Inicio de sesión (ñ.ñ)/</h2>
-                <div class="card-content">
-                    <paper-input label="Nombre de usuario" value="{{user.username}}"></paper-input>
-                    <paper-input label="Contraseña" type="password" value="{{user.password}}"></paper-input>
-                </div>
-                <div class="card-actions">
-                    <paper-button on-tap="login" id="buttonLogin">Entrar</paper-button>
-                    <br />
-                    <p>
-                        <i>Aun no estas registrado? </i>
-                        <paper-button on-tap="toggleForm"><b>Registrarte AQUI!!</b></paper-button>
-                    </p>
-                </div>
-            </paper-card>
-            <paper-card alt="Registro">
-                <h2>Completa los datos para registrarte L(*u*)/</h2>
-                <div class="card-content">
-                    <paper-input label="Nombre(s)" value="{{register.firstName}}"></paper-input>
-                    <paper-input label="Apellidos" value="{{register.lastName}}"></paper-input>
-                    <paper-input label="Edad" value="{{register.age}}"></paper-input>
-                    <paper-input label="Usuario" value="{{register.username}}"></paper-input>
-                    <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password" value="{{register.password}}"></paper-input>
-                    <sub>(minimo 5 caracteres)</sub>
-                    <paper-input label="Vuelve a ingresar tu contraseña" type="password" value="{{register.confirmPassword}}"></paper-input>
-                </div>
-                <div class="card-actions">
-                    <paper-button on-tap="signin" id="buttonRegister">Registrate</paper-button>
-                    <p>
-                        <i>Ya tienes una cuenta? </i>
-                        <paper-button on-tap="toggleForm"><b>Inicia sesión AQUI!!</b></paper-button>
-                    </p>
-                </div>
-            </paper-card>
-        </template>
+        <dom-if if="[[!toggleFormStatus]]">
+            <template>
+                <paper-card id="panelLogin" alt="Inicia sesión">
+                    <h2>Inicio de sesión (ñ.ñ)/</h2>
+                    <div class="card-content">
+                        <paper-input label="Nombre de usuario" value="{{user.username}}"></paper-input>
+                        <paper-input label="Contraseña" type="password" value="{{user.password}}"></paper-input>
+                    </div>
+                    <div class="card-actions">
+                        <paper-button on-tap="login" id="buttonLogin">Entrar</paper-button>
+                        <br />
+                        <p>
+                            <i>Aun no estas registrado? </i>
+                            <paper-button on-tap="toggleForm"><b>Registrarte AQUI!!</b></paper-button>
+                        </p>
+                    </div>
+                </paper-card>
+            </template>
+        </dom-if>
+        <dom-if if="[[toggleFormStatus]]">
+            <template>
+                <paper-card alt="Registro">
+                    <h2>Completa los datos para registrarte L(*u*)/</h2>
+                    <div class="card-content">
+                        <paper-input label="Nombre(s)" value="{{register.firstName}}"></paper-input>
+                        <paper-input label="Apellidos" value="{{register.lastName}}"></paper-input>
+                        <paper-input label="Edad" value="{{register.age}}"></paper-input>
+                        <paper-input label="Usuario" value="{{register.username}}"></paper-input>
+                        <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password" value="{{register.password}}"></paper-input>
+                        <sub>(minimo 5 caracteres)</sub>
+                        <paper-input label="Vuelve a ingresar tu contraseña" type="password" value="{{register.confirmPassword}}"></paper-input>
+                    </div>
+                    <div class="card-actions">
+                        <paper-button on-tap="signin" id="buttonRegister">Registrate</paper-button>
+                        <p>
+                            <i>Ya tienes una cuenta? </i>
+                            <paper-button on-tap="toggleForm"><b>Inicia sesión AQUI!!</b></paper-button>
+                        </p>
+                    </div>
+                </paper-card>
+            </template>
+        </dom-if>
+    </template>
 
-        <script>
-            /**
-             * `login-component`
-             *
-             *
-             * @customElement
-             * @polymer
-             * @demo demo/index.html
-             */
-            class LoginSignin extends Polymer.Element {
-                static get is() {
-                    return 'login-signin';
-                }
+    <script>
+        /**
+         * `login-component`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class LoginSignin extends Polymer.Element {
+            static get is() {
+                return 'login-signin';
+            }
 
-                static get properties() {
-                    return {
-                        register: {
-                            type: Object,
-                            value: () => ({
-                                firstName: '',
-                                lastName: '',
-                                age: '',
-                                username: '',
-                                password: '',
-                                confirmPassword: ''
-                            })
-                        },
-                        user: {
-                            type: Object,
-                            value: () => ({
-                                username: '',
-                                password: ''
-                            })
-                        },
-                        toggleFormStatus: {
-                            type: Boolean,
-                            value: false
-                        }
-                    };
-                }
-
-                toggleForm() {
-                    this.set('toggleFormStatus', !this.toggleFormStatus);
-                }
-
-                _cleanAll() {
-                    this._cleanLogin();
-                    this._cleanRegister();
-                }
-
-                login() {
-                    if (this.user.username === "" || this.user.password === "") {
-                        alert("Por favor complete sus datos.");
-                    } else {
-                        this.dispatchEvent(new CustomEvent("login-complete", {
-                            bubbles: false,
-                            composed: false,
-                            detail: this.user
-                        }));
+            static get properties() {
+                return {
+                    register: {
+                        type: Object,
+                        value: () => ({
+                            firstName: '',
+                            lastName: '',
+                            age: '',
+                            username: '',
+                            password: '',
+                            confirmPassword: ''
+                        })
+                    },
+                    user: {
+                        type: Object,
+                        value: () => ({
+                            username: '',
+                            password: ''
+                        })
+                    },
+                    toggleFormStatus: {
+                        type: Boolean,
+                        value: false
                     }
-                }
+                };
+            }
 
-                signin() {
-                    if (this._validateFieldsRequired()) {
-                        this._validatePasswords();
-                    } else {
-                        alert("Por favor llene los campos.")
-                    }
-                }
+            toggleForm() {
+                this.set('toggleFormStatus', !this.toggleFormStatus);
+            }
 
-                _cleanRegister() {
-                    this.set('register', {
-                        firstName: '',
-                        lastName: '',
-                        age: '',
-                        username: '',
-                        password: '',
-                        confirmPassword: ''
-                    });
-                }
+            _cleanAll() {
+                this._cleanLogin();
+                this._cleanRegister();
+            }
 
-                _cleanLogin() {
-                    this.set('user', {
-                        username: '',
-                        password: ''
-                    });
-                }
-
-                _validateFieldsRequired() {
-                    const fields = [this.register.firstName, this.register.lastName, this.register.username, this.register.password, this.register.confirmPassword];
-                    return fields.every(this._isEmptyElement);
-                }
-
-                _isEmptyElement(currentValue) {
-                    return currentValue !== '';
-                }
-
-                _validatePasswords() {
-                    if (this.register.password.length < 5) {
-                        alert("Su contraseña debe ser minimo de 5 caracteres.");
-                    } else {
-                        if (this.register.password !== this.register.confirmPassword) {
-                            alert("Por favor rectifique su contraseña.");
-                        } else {
-                            this.dispatchEvent(new CustomEvent("register-complete", {
-                                bubbles: false,
-                                composed: false,
-                                detail: this.register
-                            }));
-                            this.toggleForm();
-                            this._cleanAll();
-                        }
-                    }
+            login() {
+                if (this.user.username === "" || this.user.password === "") {
+                    alert("Por favor complete sus datos.");
+                } else {
+                    this.dispatchEvent(new CustomEvent("login-complete", {
+                        bubbles: false,
+                        composed: false,
+                        detail: this.user
+                    }));
                 }
             }
 
-            window.customElements.define(LoginSignin.is, LoginSignin);
-        </script>
+            signin() {
+                if (this._validateFieldsRequired()) {
+                    this._validatePasswords();
+                } else {
+                    alert("Por favor llene los campos.")
+                }
+            }
+
+            _cleanRegister() {
+                this.set('register', {
+                    firstName: '',
+                    lastName: '',
+                    age: '',
+                    username: '',
+                    password: '',
+                    confirmPassword: ''
+                });
+            }
+
+            _cleanLogin() {
+                this.set('user', {
+                    username: '',
+                    password: ''
+                });
+            }
+
+            _validateFieldsRequired() {
+                const fields = [this.register.firstName, this.register.lastName, this.register.username, this.register.password, this.register.confirmPassword];
+                return fields.every(this._isEmptyElement);
+            }
+
+            _isEmptyElement(currentValue) {
+                return currentValue !== '';
+            }
+
+            _validatePasswords() {
+                if (this.register.password.length < 5) {
+                    alert("Su contraseña debe ser minimo de 5 caracteres.");
+                } else {
+                    if (this.register.password !== this.register.confirmPassword) {
+                        alert("Por favor rectifique su contraseña.");
+                    } else {
+                        this.dispatchEvent(new CustomEvent("register-complete", {
+                            bubbles: false,
+                            composed: false,
+                            detail: this.register
+                        }));
+                        this.toggleForm();
+                        this._cleanAll();
+                    }
+                }
+            }
+        }
+
+        window.customElements.define(LoginSignin.is, LoginSignin);
+    </script>
 </dom-module>
