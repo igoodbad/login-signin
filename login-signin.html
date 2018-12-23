@@ -33,48 +33,44 @@
                 width: 50%;
             }
         </style>
-        <dom-if if="[[!toggleFormStatus]]">
-            <template>
-                <paper-card id="panelLogin" alt="Inicia sesión">
-                    <h2>Inicio de sesión (ñ.ñ)/</h2>
-                    <div class="card-content">
-                        <paper-input label="Nombre de usuario" value="{{user.username}}"></paper-input>
-                        <paper-input label="Contraseña" type="password" value="{{user.password}}"></paper-input>
-                    </div>
-                    <div class="card-actions">
-                        <paper-button on-tap="login" id="buttonLogin">Entrar</paper-button>
-                        <br />
-                        <p>
-                            <i>Aun no estas registrado? </i>
-                            <paper-button on-tap="toggleForm"><b>Registrarte AQUI!!</b></paper-button>
-                        </p>
-                    </div>
-                </paper-card>
-            </template>
-        </dom-if>
-        <dom-if if="[[toggleFormStatus]]">
-            <template>
-                <paper-card alt="Registro">
-                    <h2>Completa los datos para registrarte L(*u*)/</h2>
-                    <div class="card-content">
-                        <paper-input label="Nombre(s)" value="{{register.firstName}}"></paper-input>
-                        <paper-input label="Apellidos" value="{{register.lastName}}"></paper-input>
-                        <paper-input label="Edad" value="{{register.age}}"></paper-input>
-                        <paper-input label="Usuario" value="{{register.username}}"></paper-input>
-                        <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password" value="{{register.password}}"></paper-input>
-                        <sub>(minimo 5 caracteres)</sub>
-                        <paper-input label="Vuelve a ingresar tu contraseña" type="password" value="{{register.confirmPassword}}"></paper-input>
-                    </div>
-                    <div class="card-actions">
-                        <paper-button on-tap="signin" id="buttonRegister">Registrate</paper-button>
-                        <p>
-                            <i>Ya tienes una cuenta? </i>
-                            <paper-button on-tap="toggleForm"><b>Inicia sesión AQUI!!</b></paper-button>
-                        </p>
-                    </div>
-                </paper-card>
-            </template>
-        </dom-if>
+        <div hidden$="[[toggleFormStatus]]">
+            <paper-card id="panelLogin" alt="Inicia sesión">
+                <h2>Inicio de sesión (ñ.ñ)/</h2>
+                <div class="card-content">
+                    <paper-input label="Nombre de usuario" value="{{user.username}}"></paper-input>
+                    <paper-input label="Contraseña" type="password" value="{{user.password}}"></paper-input>
+                </div>
+                <div class="card-actions">
+                    <paper-button on-tap="login" id="buttonLogin">Entrar</paper-button>
+                    <br />
+                    <p>
+                        <i>Aun no estas registrado? </i>
+                        <paper-button on-tap="toggleForm"><b>Registrarte AQUI!!</b></paper-button>
+                    </p>
+                </div>
+            </paper-card>
+        </div>
+        <div hidden$="[[!toggleFormStatus]]">
+            <paper-card alt="Registro">
+                <h2>Completa los datos para registrarte L(*u*)/</h2>
+                <div class="card-content">
+                    <paper-input label="Nombre(s)" value="{{register.firstName}}"></paper-input>
+                    <paper-input label="Apellidos" value="{{register.lastName}}"></paper-input>
+                    <paper-input label="Edad" value="{{register.age}}"></paper-input>
+                    <paper-input label="Usuario" value="{{register.username}}"></paper-input>
+                    <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password" value="{{register.password}}"></paper-input>
+                    <sub>(minimo 5 caracteres)</sub>
+                    <paper-input label="Vuelve a ingresar tu contraseña" type="password" value="{{register.confirmPassword}}"></paper-input>
+                </div>
+                <div class="card-actions">
+                    <paper-button on-tap="signin" id="buttonRegister">Registrate</paper-button>
+                    <p>
+                        <i>Ya tienes una cuenta? </i>
+                        <paper-button on-tap="toggleForm"><b>Inicia sesión AQUI!!</b></paper-button>
+                    </p>
+                </div>
+            </paper-card>
+        </div>
     </template>
 
     <script>
