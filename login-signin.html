@@ -55,17 +55,15 @@
             <paper-card alt="Registro">
                 <h2>[[labels.titleRegister]]</h2>
                 <div class="card-content">
-                    <template is="dom-repeat" items="[[formRegister.formInputs]]" as="fInput">
-                        <paper-input label="[[fInput.label]]" id="[[fInput.aliasInput]]" type="[[fInput.type]]"></paper-input>
-                    </template>
-                    <paper-input label="Nombre(s)" value="{{register.firstName}}"></paper-input>
-                    <paper-input label="Apellidos" value="{{register.lastName}}"></paper-input>
-                    <paper-input label="Edad" value="{{register.age}}"></paper-input>
-                    <paper-input label="Usuario" value="{{register.username}}"></paper-input>
-
-                    <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password" value="{{register.password}}"></paper-input>
-                    <sub>(minimo 5 caracteres)</sub>
-                    <paper-input label="Vuelve a ingresar tu contraseña" type="password" value="{{register.confirmPassword}}"></paper-input>
+                    <paper-input label="[[formRegister.formInputs.firstName]]" value="{{register.firstName}}"></paper-input>
+                    <paper-input label="[[formRegister.formInputs.lastName]]" value="{{register.lastName}}"></paper-input>
+                    <paper-input label="[[formRegister.formInputs.age]]" value="{{register.age}}"></paper-input>
+                    <paper-input label="[[formRegister.formInputs.username]]" value="{{register.username}}"></paper-input>
+                    <paper-input label="[[formRegister.formInputs.password.label]]" 
+                    aria-placeholder="[[formRegister.formInputs.password.label]]"
+                        type="password" value="{{register.password}}"></paper-input>
+                    <sub>[[formRegister.formInputs.password.sub]]</sub>
+                    <paper-input label="[[formRegister.formInputs.confirmPassword]]" type="password" value="{{register.confirmPassword}}"></paper-input>
                 </div>
                 <div class="card-actions">
                     <paper-button on-tap="signin" id="buttonRegister">[[formRegister.btnSignup]]</paper-button>
@@ -126,7 +124,17 @@
                         value: () => ({
                             btnSignup: "Registrate",
                             btnLogin: "Inicia sesión AQUI!!",
-                            formInputs: []
+                            formInputs: {
+                                firstName: "Nombre(s)",
+                                lastName: "Apellidos",
+                                age: "Edad",
+                                username: "Usuario",
+                                password: {
+                                    label: "Contraseña",
+                                    sub: "(minimo 5 caracteres)"
+                                },
+                                confirmPasword: "Vuelve a ingresar tu contraseña"
+                            }
                         })
                     },
                     user: {
