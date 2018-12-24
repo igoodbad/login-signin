@@ -1,30 +1,59 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>login-component demo</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+  <title>login-component demo</title>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../login-signin.html">
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
 
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      </style>
-    </custom-style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic login-component demo</h3>
-      <demo-snippet>
-        <template>
-          <login-signin></login-signin>
-        </template>
-      </demo-snippet>
-    </div>
-  </body>
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../login-signin.html">
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </custom-style>
+</head>
+
+<body>
+  <div class="vertical-section-container centered">
+    <h3>Basic login-component demo</h3>
+    <demo-snippet>
+      <template>
+        <login-signin id="loginComponent"></login-signin>
+      </template>
+    </demo-snippet>
+  </div>
+  <script>
+    let component = document.querySelector("#loginComponent");
+    component.labels = {
+      titleLogin: "(ñ.ñ)/",
+      titleRegister: "L(*u*)/",
+      questionRegister: "Registrado?",
+      haveAccount: "Tienes cuenta?"
+    }
+    /*component.formLogin = {
+      inputUser: "Nick Name",
+      inputPassword: "Password",
+      btnLogin: "Login",
+      btnRegister: "Register here!!!"
+    }
+    component.formRegister = {
+      btnSignup: "Sign up",
+      btnLogin: "Login here!!",
+      formInputs: [
+        { type: "text", label: "demo 1", aliasInput: "demo1" },
+        { type: "number", label: "demo 2", aliasInput: "demo2" },
+        { type: "text", label: "demo 3", aliasInput: "demo3" },
+        { type: "text", label: "demo 4", aliasInput: "demo4" }
+      ]
+    }*/
+    component.registerForm = true;
+  </script>
+</body>
+
 </html>

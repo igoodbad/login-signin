@@ -35,39 +35,42 @@
         </style>
         <div hidden$="[[toggleFormStatus]]">
             <paper-card id="panelLogin" alt="Inicia sesión">
-                <h2>Inicio de sesión (ñ.ñ)/</h2>
+                <h2>[[labels.titleLogin]]</h2>
                 <div class="card-content">
-                    <paper-input label="Nombre de usuario" value="{{user.username}}"></paper-input>
-                    <paper-input label="Contraseña" type="password" value="{{user.password}}"></paper-input>
+                    <paper-input label="[[formLogin.inputUser]]" value="{{user.username}}"></paper-input>
+                    <paper-input label="[[formLogin.inputPassword]]" type="password" value="{{user.password}}"></paper-input>
                 </div>
                 <div class="card-actions">
-                    <paper-button on-tap="login" id="buttonLogin">Entrar</paper-button>
-                    <br />
-                    <p>
-                        <i>Aun no estas registrado? </i>
-                        <paper-button on-tap="toggleForm"><b>Registrarte AQUI!!</b></paper-button>
-                    </p>
+                    <paper-button on-tap="login" id="buttonLogin">[[formLogin.btnLogin]]</paper-button>
+                    <div hidden$="[[!registerForm]]">
+                        <p>
+                            <i>[[labels.questionRegister]]</i>
+                            <paper-button on-tap="toggleForm"><b>[[formLogin.btnRegister]]</b></paper-button>
+                        </p>
+                    </div>
                 </div>
             </paper-card>
         </div>
         <div hidden$="[[!toggleFormStatus]]">
             <paper-card alt="Registro">
-                <h2>Completa los datos para registrarte L(*u*)/</h2>
+                <h2>[[labels.titleRegister]]</h2>
                 <div class="card-content">
+                    <template is="dom-repeat" items="[[formRegister.formInputs]]" as="fInput">
+                        <paper-input label="[[fInput.label]]" id="[[fInput.aliasInput]]" type="[[fInput.type]]"></paper-input>
+                    </template>
                     <paper-input label="Nombre(s)" value="{{register.firstName}}"></paper-input>
                     <paper-input label="Apellidos" value="{{register.lastName}}"></paper-input>
                     <paper-input label="Edad" value="{{register.age}}"></paper-input>
                     <paper-input label="Usuario" value="{{register.username}}"></paper-input>
+
                     <paper-input label="Contraseña" aria-placeholder="(minimo 5 caracteres)" type="password" value="{{register.password}}"></paper-input>
                     <sub>(minimo 5 caracteres)</sub>
                     <paper-input label="Vuelve a ingresar tu contraseña" type="password" value="{{register.confirmPassword}}"></paper-input>
                 </div>
                 <div class="card-actions">
-                    <paper-button on-tap="signin" id="buttonRegister">Registrate</paper-button>
-                    <p>
-                        <i>Ya tienes una cuenta? </i>
-                        <paper-button on-tap="toggleForm"><b>Inicia sesión AQUI!!</b></paper-button>
-                    </p>
+                    <paper-button on-tap="signin" id="buttonRegister">[[formRegister.btnSignup]]</paper-button>
+                    <i>[[labels.haveAccount]]</i>
+                    <paper-button on-tap="toggleForm"><b>[[formRegister.btnLogin]]</b></paper-button>
                 </div>
             </paper-card>
         </div>
@@ -100,6 +103,32 @@
                             confirmPassword: ''
                         })
                     },
+                    labels: {
+                        type: Object,
+                        value: () => ({
+                            titleLogin: "Inicio de sesión (ñ.ñ)/",
+                            titleRegister: "Completa los datos para registrarte L(*u*)/",
+                            questionRegister: "Aun no estas registrado?",
+                            haveAccount: "Ya tienes una cuenta?"
+                        })
+                    },
+                    formLogin: {
+                        type: Object,
+                        value: () => ({
+                            inputUser: "Nombre de usuario",
+                            inputPassword: "Contraseña",
+                            btnLogin: "Entrar",
+                            btnRegister: "Registrarte AQUI!!"
+                        })
+                    },
+                    formRegister: {
+                        type: Object,
+                        value: () => ({
+                            btnSignup: "Registrate",
+                            btnLogin: "Inicia sesión AQUI!!",
+                            formInputs: []
+                        })
+                    },
                     user: {
                         type: Object,
                         value: () => ({
@@ -110,6 +139,10 @@
                     toggleFormStatus: {
                         type: Boolean,
                         value: false
+                    },
+                    registerForm: {
+                        type: Boolean,
+                        value: true
                     }
                 };
             }
