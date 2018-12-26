@@ -17,7 +17,8 @@ polymer serve --open
 1. Login, simple view show two inputs:
     + username
     + password
-  The default language is 'Español (es)'
+
+    The default language is 'Español (es)'
 2. Sign up, simple view show six inputs:
     + first name
     + last name
@@ -26,7 +27,7 @@ polymer serve --open
     + password
     + confirm password
 
-This form check password and confirm equals, check the length minimun is five characteres  
+    This form check password and confirm equals, check the length minimun is five characteres  
 
 ### Action Efects
 + Toogle between Login / Sign up
