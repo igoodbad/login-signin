@@ -1,6 +1,6 @@
 # \<login-signup\>
 
-This component is structured to display a view of Login / Sign up
+Component to display Login / Sign up forms, this component can be only Login if configure the option
 
 ## Installation
 
@@ -14,18 +14,30 @@ polymer serve --open
 
 ## Usage
 
++ Login
+Simple view show two inputs:
+    + username
+    + password 
+The default language is 'Español (es)'
++ Sign up
+Simple view show six inputs:
+    + first name
+    + last name
+    + age
+    + username
+    + password
+    + confirm password
+This form check password and confirm equals, check the length minimun is five characteres  
+
 ### Action Efects
 - Toogle between Login / Sign up
 - Validations includes
 + Login
     + Username and Password required
-    + Only 1 user register
-        + username: igoodbad
-        + password: practices
-    + Validation username/password incorrect<br />
-2. Register<br />
-    - Password minimun length 5 characteres<br />
-    - Password confirm<br />
+    + Validation username/password incorrect
++ Register
+    - Password minimun length 5 characteres
+    - Password confirm
 
 
 ## Contributing
