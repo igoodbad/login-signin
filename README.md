@@ -1,4 +1,4 @@
-# <login-signup>
+# \<login-signup\>
 
 This component is structured to display a view of Login / Sign up
 
