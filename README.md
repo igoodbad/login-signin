@@ -25,7 +25,7 @@ polymer serve --open
     + username
     + password
     + confirm password
-- 
+
 This form check password and confirm equals, check the length minimun is five characteres  
 
 ### Action Efects
