@@ -17,7 +17,7 @@ polymer serve --open
 + Login
 Simple view show two inputs:
     + username
-    + password 
+    + password  
 The default language is 'Español (es)'
 + Sign up
 Simple view show six inputs:
@@ -26,18 +26,18 @@ Simple view show six inputs:
     + age
     + username
     + password
-    + confirm password
+    + confirm password  
 This form check password and confirm equals, check the length minimun is five characteres  
 
 ### Action Efects
-- Toogle between Login / Sign up
-- Validations includes
++ Toogle between Login / Sign up
++ Validations includes
 + Login
     + Username and Password required
     + Validation username/password incorrect
 + Register
-    - Password minimun length 5 characteres
-    - Password confirm
+    + Password minimun length 5 characteres
+    + Password confirm
 
 
 ## Contributing
