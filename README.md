@@ -1,21 +1,21 @@
-# Practice 1 - Login Component
+# <login-signup>
 
-This component is structured to display a view of Login / Sign in
+This component is structured to display a view of Login / Sign up
 
 ## Installation
 
 ```sh
 npm i -g polymer-cli
 npm i -g bower
-git clone https://github.com/igoodbad/practicas-polymer.git
-cd practicas-polymer/
+git clone https://github.com/igoodbad/login-signup.git
+cd login-signup/
 polymer serve --open
 ```
 
 ## Usage
 
 ### Action Efects
-- Toogle between Login / Sign in
+- Toogle between Login / Sign up
 - Validations includes
 + Login
     + Username and Password required

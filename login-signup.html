@@ -3,7 +3,7 @@
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-button/paper-button.html">
 
-<dom-module id="login-signin">
+<dom-module id="login-signup">
     <template>
         <style>
             :host {
@@ -83,9 +83,9 @@
          * @polymer
          * @demo demo/index.html
          */
-        class LoginSignin extends Polymer.Element {
+        class LoginSignup extends Polymer.Element {
             static get is() {
-                return 'login-signin';
+                return 'login-signup';
             }
 
             static get properties() {
@@ -230,6 +230,6 @@
             }
         }
 
-        window.customElements.define(LoginSignin.is, LoginSignin);
+        window.customElements.define(LoginSignup.is, LoginSignup);
     </script>
 </dom-module>
